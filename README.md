@@ -50,11 +50,11 @@ You may want to omit the submit_form variable when making your query, so it can 
 include("Tool-booth/lib.php");
 $toolbooth = new ToolBooth();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-if (isset($_POST["submit_form"])) {
-//Here is the function
-$db = mysqli_connect($host, $user, $password, $database);
-$sql_query = $toolbooth->insertSQL($db, $table, "POST", ["submit_form"]);
-}
+	if (isset($_POST["submit_form"])) {
+		//Here is the function
+		$db = mysqli_connect($host, $user, $password, $database);
+		$sql_query = $toolbooth->insertSQL($db, $table, "POST", ["submit_form"]);
+	}
 }
 ```
 The above returns a properly sanitized SQL query capable of preventing SQL injection and Script injection and stores it in the $sql_query variable, which can be used to execute a query.
@@ -113,11 +113,11 @@ You may want to omit the submit_form variable when making your query, so it can 
 include("Tool-booth/lib.php");
 $toolbooth = new ToolBooth();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-if (isset($_POST["submit_form"])) {
-//Here is the function
-$db = mysqli_connect($host, $user, $password, $database);
-$sql_query = $toolbooth->updateSQL($db, $table, "POST", ["submit_form"], "WHERE id >= 10");
-}
+	if (isset($_POST["submit_form"])) {
+		//Here is the function
+		$db = mysqli_connect($host, $user, $password, $database);
+		$sql_query = $toolbooth->updateSQL($db, $table, "POST", ["submit_form"], "WHERE id >= 10");
+	}
 }
 ```
 The above returns a properly sanitized SQL query capable of preventing SQL injection and Script injection and stores it in the $sql_query variable, which can be used to execute a query.
@@ -166,24 +166,24 @@ You may want to omit the submit_form variable when making your query, so it can 
 include("Tool-booth/lib.php");
 $toolbooth = new ToolBooth();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-if (isset($_POST["submit_form"])) {
-//Here is the function
-$validate = $toolbooth->validator(["email"=>"email", "phone"=>"phone"], "POST", ["submit_form"], 0);
-}
+	if (isset($_POST["submit_form"])) {
+		//Here is the function
+		$validate = $toolbooth->validator(["email"=>"email", "phone"=>"phone"], "POST", ["submit_form"], 0);
+	}
 }
 ```
 The above returns an empty JSON-encoded array if there is no error, else it returns an array containing the defaulted parameters. You may want to do this after the above method:
 ```php
 $result = json_decode($validate, 1);
 if (count($result) == 0) {
-//No errors. Do nothing or what you wish
+	//No errors. Do nothing or what you wish
 }
 else {
-print_r($result);
-/*There is an error. A typical error would be in the form:
-Array[0=>"email", 1=>"phone", 2=>"empty"];
-If the email and phone do not match and there is an empty value in any of them
-*/
+	print_r($result);
+	/*There is an error. A typical error would be in the form:
+	Array[0=>"email", 1=>"phone", 2=>"empty"];
+	If the email and phone do not match and there is an empty value in any of them
+	*/
 }
 ```
 
